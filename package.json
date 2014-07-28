@@ -1,10 +1,10 @@
 {
-  "name": "generator-fayde-lib",
+  "name": "generator-faydelib",
   "version": "0.1.0",
   "description": "Library generator for Fayde applications.",
   "repository": {
     "type": "git",
-    "url": "git://github.com/BSick7/generator-fayde-lib"
+    "url": "git://github.com/BSick7/generator-faydelib"
   },
   "keywords": [
     "yeoman-generator"
