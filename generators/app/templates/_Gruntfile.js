@@ -33,7 +33,7 @@ module.exports = function (grunt) {
         typescript: {
             build: {
                 src: ['src/_Version.ts', 'src/*.ts', 'src/**/*.ts'],
-                dest: '<%= meta.name %>.js',
+                dest: '<%%= meta.name %>.js',
                 options: {
                     target: 'es5',
                     declaration: true,
@@ -60,16 +60,16 @@ module.exports = function (grunt) {
         copy: {
             pretest: {
                 files: [
-                    { expand: true, flatten: true, src: ['Themes/*'], dest: 'test/lib/<%= meta.name %>/Themes', filter: 'isFile' },
-                    { expand: true, flatten: true, src: ['<%= meta.name %>.js'], dest: 'test/lib/<%= meta.name %>', filter: 'isFile' },
-                    { expand: true, flatten: true, src: ['<%= meta.name %>.d.ts'], dest: 'test/lib/<%= meta.name %>', filter: 'isFile' }
+                    { expand: true, flatten: true, src: ['Themes/*'], dest: 'test/lib/<%%= meta.name %>/Themes', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['<%%= meta.name %>.js'], dest: 'test/lib/<%%= meta.name %>', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['<%%= meta.name %>.d.ts'], dest: 'test/lib/<%%= meta.name %>', filter: 'isFile' }
                 ]
             },
             pretestsite: {
                 files: [
-                    { expand: true, flatten: true, src: ['Themes/*'], dest: 'testsite/lib/<%= meta.name %>/Themes', filter: 'isFile' },
-                    { expand: true, flatten: true, src: ['<%= meta.name %>.js'], dest: 'testsite/lib/<%= meta.name %>', filter: 'isFile' },
-                    { expand: true, flatten: true, src: ['<%= meta.name %>.d.ts'], dest: 'testsite/lib/<%= meta.name %>', filter: 'isFile' }
+                    { expand: true, flatten: true, src: ['Themes/*'], dest: 'testsite/lib/<%%= meta.name %>/Themes', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['<%%= meta.name %>.js'], dest: 'testsite/lib/<%%= meta.name %>', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['<%%= meta.name %>.d.ts'], dest: 'testsite/lib/<%%= meta.name %>', filter: 'isFile' }
                 ]
             }
         },
@@ -90,7 +90,7 @@ module.exports = function (grunt) {
                 tasks: ['typescript:build']
             },
             dist: {
-                files: ['<%= meta.name %>.js'],
+                files: ['<%%= meta.name %>.js'],
                 tasks: ['copy:pretestsite']
             },
             testsitets: {
@@ -112,7 +112,7 @@ module.exports = function (grunt) {
         },
         open: {
             testsite: {
-                path: 'http://localhost:<%= ports.server %>/default.html'
+                path: 'http://localhost:<%%= ports.server %>/default.html'
             }
         },
         version: {
@@ -125,16 +125,16 @@ module.exports = function (grunt) {
         },
         nugetpack: {
             dist: {
-                src: './nuget/<%= meta.name %>.nuspec',
+                src: './nuget/<%%= meta.name %>.nuspec',
                 dest: './nuget/',
                 options: {
-                    version: '<%= pkg.version %>'
+                    version: '<%%= pkg.version %>'
                 }
             }
         },
         nugetpush: {
             dist: {
-                src: './nuget/<%= meta.name %>.<%= pkg.version %>.nupkg'
+                src: './nuget/<%%= meta.name %>.<%%= pkg.version %>.nupkg'
             }
         }
     });

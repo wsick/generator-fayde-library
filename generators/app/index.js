@@ -42,7 +42,7 @@ module.exports = yeoman.generators.Base.extend({
         },
         gruntSetup: function () {
             this.copy('_package.json', 'package.json');
-            this.copy('_Gruntfile.js', 'Gruntfile.js');
+            this.template('_Gruntfile.js', 'Gruntfile.js', this);
         }
     },
     writing: {
