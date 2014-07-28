@@ -34,7 +34,7 @@ module.exports = yeoman.generators.Base.extend({
     },
     configuring: {
         bowerSetup: function () {
-            this.copy('_bower.json', 'bower.json');
+            this.template('_bower.json', 'bower.json', this);
             this.copy('testsite/_bowerrc', 'testsite/.bowerrc');
             this.copy('testsite/_bower.json', 'testsite/bower.json');
         },
