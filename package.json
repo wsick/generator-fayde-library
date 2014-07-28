@@ -1,15 +1,18 @@
 {
-  "name": "generator-faydelib",
+  "name": "generator-fayde-library",
   "version": "0.1.0",
   "description": "Library generator for Fayde applications.",
+  "keywords": [
+    "yeoman-generator",
+    "fayde"
+  ],
+  "homepage": "https://github.com/BSick7/generator-fayde-library",
+  "bugs": "https://github.com/BSick7/generator-fayde-library/issues",
+  "author": "Brad Sickles <brad.sickles@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/BSick7/generator-faydelib"
+    "url": "git://github.com/BSick7/generator-fayde-library"
   },
-  "keywords": [
-    "yeoman-generator"
-  ],
-  "author": "Brad Sickles",
   "license": "MIT",
   "dependencies": {
     "yeoman-generator": "^0.17.1"
