@@ -63,7 +63,7 @@ module.exports = yeoman.generators.Base.extend({
             this.template('testsite/_default.html', 'testsite/default.html', this);
             this.template('testsite/Views/_test1.fayde', 'testsite/Views/test1.fayde', this);
             this.copy('testsite/default.fap', 'testsite/default.fap');
-            this.copy('testsite/require-config.js', 'testsite/require-config.js');
+            this.template('testsite/_require-config.js', 'testsite/require-config.js', this);
         }
     },
     install: {
