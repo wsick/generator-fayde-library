@@ -49,7 +49,7 @@ module.exports = function (grunt) {
                 }
             },
             testsite: {
-                src: ['testsite/**/*.ts', '!testsite/**/*.ts'],
+                src: ['testsite/**/*.ts', '!testsite/lib/**/*.ts'],
                 options: {
                     target: 'es5',
                     module: 'amd',
