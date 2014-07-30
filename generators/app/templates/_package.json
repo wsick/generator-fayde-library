@@ -1,5 +1,5 @@
 {
-    "name": "<%= _.slugify(_.humanize(appname)) %>",
+    "name": "<%= name %>",
     "version": "0.1.0",
     "main": "Gruntfile.js",
     "devDependencies": {
