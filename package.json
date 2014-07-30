@@ -1,6 +1,6 @@
 {
   "name": "generator-fayde-library",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Library generator for Fayde applications.",
   "keywords": [
     "yeoman-generator",
