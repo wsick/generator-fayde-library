@@ -3,11 +3,6 @@
 <head>
     <title></title>
     <script src="require-config.js"></script>
-    <script data-lib="<%= name %>">
-        require.shim["lib/<%= name %>/<%= name %>"] = {
-            exports: "<%= module_name %>"
-        }
-    </script>
     <script src="lib/requirejs/require.js"></script>
     <style>
         * {

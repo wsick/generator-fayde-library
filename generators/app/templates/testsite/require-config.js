@@ -6,11 +6,16 @@ var require = {
     },
     deps: ["text", "Fayde"],
     callback: function (text, Fayde) {
-        Fayde.Run();
+        Fayde.LoadConfigJson(function (config, err) {
+            if (err)
+                console.warn('Could not load fayde configuration file.', err);
+            Fayde.Run();
+        });
     },
     shim: {
         "Fayde": {
-            exports: "Fayde"
+            exports: "Fayde",
+            deps: ["text"]
         }
     }
 };

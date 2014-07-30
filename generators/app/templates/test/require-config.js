@@ -8,7 +8,7 @@ var require = {
     shim: {
         "Fayde": {
             exports: "Fayde",
-            deps: ['text']
+            deps: ["text"]
         },
         "runner": {
             deps: ["Fayde"]

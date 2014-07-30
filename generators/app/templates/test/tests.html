@@ -11,11 +11,6 @@
         QUnit.config.autostart = false;
     </script>
     <script src="require-config.js"></script>
-    <script data-lib="<%= name %>">
-        require.shim["lib/<%= name %>/<%= name %>"] = {
-            exports: "<%= module_name %>"
-        }
-    </script>
     <script src="lib/requirejs/require.js" data-main="runner.js"></script>
 </head>
 <body>
