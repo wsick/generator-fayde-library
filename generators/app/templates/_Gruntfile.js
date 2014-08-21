@@ -1,5 +1,7 @@
 var version = require('./build/version'),
-    setup = require('./build/setup');
+    setup = require('./build/setup'),
+    path = require('path'),
+    connect_livereload = require('connect-livereload');
 
 module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-typescript');
@@ -18,16 +20,31 @@ module.exports = function (grunt) {
         name: '<%= name %>'
     };
 
+    var dirs = {
+        test: {
+            root: 'test'
+        },
+        testsite: {
+            root: 'testsite',
+            build: 'testsite/.build'
+        }
+    };
+
+    function mount(connect, dir) {
+        return connect.static(path.resolve(dir));
+    }
+
     grunt.initConfig({
         ports: ports,
         meta: meta,
+        dirs: dirs,
         pkg: grunt.file.readJSON('./package.json'),
         setup: {
             test: {
-                cwd: './test'
+                cwd: dirs.test.root
             },
             testsite: {
-                cwd: './testsite'
+                cwd: dirs.testsite.root
             }
         },
         typescript: {
@@ -41,7 +58,7 @@ module.exports = function (grunt) {
                 }
             },
             test: {
-                src: ['test/**/*.ts', '!test/lib/**/*.ts'],
+                src: ['<%%= dirs.test.root %>/**/*.ts', '!<%%= dirs.test.root %>/lib/**/*.ts'],
                 options: {
                     target: 'es5',
                     module: 'amd',
@@ -49,8 +66,10 @@ module.exports = function (grunt) {
                 }
             },
             testsite: {
-                src: ['testsite/**/*.ts', '!testsite/lib/**/*.ts'],
+                src: ['<%%= dirs.testsite.root %>/**/*.ts', '!<%%= dirs.testsite.root %>/lib/**/*.ts'],
+                dest: '<%%= dirs.testsite.build %>',
                 options: {
+                    basePath: dirs.testsite.root,
                     target: 'es5',
                     module: 'amd',
                     sourceMap: true
@@ -60,27 +79,34 @@ module.exports = function (grunt) {
         copy: {
             pretest: {
                 files: [
-                    { expand: true, flatten: true, src: ['Themes/*'], dest: 'test/lib/<%%= meta.name %>/Themes', filter: 'isFile' },
-                    { expand: true, flatten: true, src: ['<%%= meta.name %>.js'], dest: 'test/lib/<%%= meta.name %>', filter: 'isFile' },
-                    { expand: true, flatten: true, src: ['<%%= meta.name %>.d.ts'], dest: 'test/lib/<%%= meta.name %>', filter: 'isFile' }
+                    { expand: true, flatten: true, src: ['Themes/*'], dest: '<%%= dirs.test.root %>/lib/<%%= meta.name %>/Themes', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['<%%= meta.name %>.js'], dest: '<%%= dirs.test.root %>/lib/<%%= meta.name %>', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['<%%= meta.name %>.d.ts'], dest: '<%%= dirs.test.root %>/lib/<%%= meta.name %>', filter: 'isFile' }
                 ]
             },
             pretestsite: {
                 files: [
-                    { expand: true, flatten: true, src: ['Themes/*'], dest: 'testsite/lib/<%%= meta.name %>/Themes', filter: 'isFile' },
-                    { expand: true, flatten: true, src: ['<%%= meta.name %>.js'], dest: 'testsite/lib/<%%= meta.name %>', filter: 'isFile' },
-                    { expand: true, flatten: true, src: ['<%%= meta.name %>.d.ts'], dest: 'testsite/lib/<%%= meta.name %>', filter: 'isFile' }
+                    { expand: true, flatten: true, src: ['Themes/*'], dest: '<%%= dirs.testsite.root %>/lib/<%%= meta.name %>/Themes', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['<%%= meta.name %>.js'], dest: '<%%= dirs.testsite.root %>/lib/<%%= meta.name %>', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['<%%= meta.name %>.d.ts'], dest: '<%%= dirs.testsite.root %>/lib/<%%= meta.name %>', filter: 'isFile' }
                 ]
             }
         },
         qunit: {
-            all: ['test/**/*.html']
+            all: ['<%%= dirs.test.root %>/**/*.html']
         },
         connect: {
             server: {
                 options: {
                     port: ports.server,
-                    base: './testsite/'
+                    base: dirs.testsite.root,
+                    middleware: function (connect) {
+                        return [
+                            connect_livereload({ port: ports.livereload }),
+                            mount(connect, dirs.testsite.build),
+                            mount(connect, dirs.testsite.root)
+                        ];
+                    }
                 }
             }
         },
@@ -94,17 +120,17 @@ module.exports = function (grunt) {
                 tasks: ['copy:pretestsite']
             },
             testsitets: {
-                files: ['testsite/**/*.ts'],
+                files: ['<%%= dirs.testsite.root %>/**/*.ts'],
                 tasks: ['typescript:testsite']
             },
             testsitejs: {
-                files: ['testsite/**/*.js'],
+                files: ['<%%= dirs.testsite.root %>/**/*.js'],
                 options: {
                     livereload: ports.livereload
                 }
             },
             testsitefay: {
-                files: ['testsite/**/*.fap', 'testsite/**/*.fayde'],
+                files: ['<%%= dirs.testsite.root %>/**/*.fap', '<%%= dirs.testsite.root %>/**/*.fayde'],
                 options: {
                     livereload: ports.livereload
                 }

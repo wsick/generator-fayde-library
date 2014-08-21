@@ -14,7 +14,7 @@ module.exports = yeoman.generators.Base.extend({
                 default: this.appname // Default to current folder name
             }, function (answers) {
                 this.name = answers.name;
-                this.log(answers.name);
+                //this.log(answers.name);
                 done();
             }.bind(this));
         },
@@ -27,7 +27,7 @@ module.exports = yeoman.generators.Base.extend({
                 default: this.appname // Default to current folder name
             }, function (answers) {
                 this.module_name = answers.module_name;
-                this.log(answers.module_name);
+                //this.log(answers.module_name);
                 done();
             }.bind(this));
         }
@@ -44,7 +44,7 @@ module.exports = yeoman.generators.Base.extend({
             this.copy('_package.json', 'package.json');
             this.template('_Gruntfile.js', 'Gruntfile.js', this);
         },
-        faydeSetup: function() {
+        faydeSetup: function () {
             this.template('test/_fayde.json', 'test/fayde.json', this);
             this.template('testsite/_fayde.json', 'testsite/fayde.json', this);
         }
@@ -55,6 +55,10 @@ module.exports = yeoman.generators.Base.extend({
             this.copy('build/setup.js', 'build/setup.js');
             this.copy('build/version.js', 'build/version.js');
             this.template('build/_VersionTemplate._ts', 'build/_VersionTemplate._ts', this);
+        },
+        themeFiles: function () {
+            this.template('Themes/_Default.theme.xml', 'Themes/Default.theme.xml', this);
+            this.template('Themes/_Metro.theme.xml', 'Themes/Metro.theme.xml', this);
         },
         testfiles: function () {
             this.copy('test/qunit.d.ts', 'test/qunit.d.ts');
