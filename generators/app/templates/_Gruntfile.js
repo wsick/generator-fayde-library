@@ -25,6 +25,7 @@ module.exports = function (grunt) {
     var dirs = {
         test: {
             root: 'test',
+            build: 'test/.build',
             lib: 'test/lib'
         },
         testsite: {
@@ -110,8 +111,10 @@ module.exports = function (grunt) {
                     'lib/minerva/minerva.d.ts',
                     'lib/fayde/fayde.d.ts'
                 ],
+                dest: '<%%= dirs.test.build %>',
                 options: {
                     target: 'es5',
+                    basePath: '<%%= dirs.test.root %>/tests',
                     module: 'amd',
                     sourceMap: true
                 }
