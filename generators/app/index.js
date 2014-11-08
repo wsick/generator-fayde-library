@@ -3,6 +3,15 @@ var yeoman = require('yeoman-generator');
 module.exports = yeoman.generators.Base.extend({
     constructor: function () {
         yeoman.generators.Base.apply(this, arguments);
+
+        this.on('end', function () {
+            this.installDependencies({
+                skipInstall: this.options['skip-install'],
+                callback: function () {
+                    this.spawnCommand('grunt', ['symlink:test', 'symlink:testsite']);
+                }.bind(this) // bind the callback to the parent scope
+            });
+        });
     },
     prompting: {
         promptName: function () {
@@ -79,6 +88,7 @@ module.exports = yeoman.generators.Base.extend({
     install: {
         grunt: function () {
             this.npmInstall();
+            this.bowerInstall();
         }
     }
 });
