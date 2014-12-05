@@ -72,6 +72,7 @@ module.exports = function (grunt) {
             },
             testsite: {
                 files: [
+                    { src: './lib/nullstone', dest: '<%%= dirs.testsite.lib %>/nullstone' },
                     { src: './lib/minerva', dest: '<%%= dirs.testsite.lib %>/minerva' },
                     { src: './lib/fayde', dest: '<%%= dirs.testsite.lib %>/fayde' },
                     { src: './lib/requirejs', dest: '<%%= dirs.testsite.lib %>/requirejs' },
@@ -107,7 +108,8 @@ module.exports = function (grunt) {
                     '!<%%= dirs.test.lib %>/**/*.ts',
                     'lib/nullstone/dist/nullstone.d.ts',
                     'lib/minerva/dist/minerva.d.ts',
-                    'lib/fayde/dist/fayde.d.ts'
+                    'lib/fayde/dist/fayde.d.ts',
+                    'dist/<%%= meta.name %>.d.ts'
                 ],
                 dest: dirs.test.build,
                 options: {
@@ -124,7 +126,8 @@ module.exports = function (grunt) {
                     '!<%%= dirs.testsite.lib %>/**/*.ts',
                     'lib/nullstone/dist/nullstone.d.ts',
                     'lib/minerva/dist/minerva.d.ts',
-                    'lib/fayde/dist/fayde.d.ts'
+                    'lib/fayde/dist/fayde.d.ts',
+                    'dist/<%%= meta.name %>.d.ts'
                 ],
                 dest: dirs.testsite.build,
                 options: {
