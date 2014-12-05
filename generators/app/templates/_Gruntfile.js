@@ -45,8 +45,8 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('./package.json'),
         clean: {
             bower: ['./lib'],
-            testsite: ['<%%= dirs.testsite.lib %>'],
-            test: ['<%%= dirs.test.lib %>']
+            testsite: [dirs.testsite.lib],
+            test: [dirs.test.lib]
         },
         setup: {
             base: {
@@ -94,7 +94,7 @@ module.exports = function (grunt) {
                     './src/*.ts',
                     './src/**/*.ts'
                 ],
-                dest: 'dist/<%%= meta.name %>.js',
+                dest: './dist/<%%= meta.name %>.js',
                 options: {
                     target: 'es5',
                     declaration: true,
@@ -170,7 +170,7 @@ module.exports = function (grunt) {
             },
             testsitejs: {
                 files: [
-                    '<%%= dirs.testsite.root %>/**/*.js'
+                    '<%%= dirs.testsite.build %>/**/*.js'
                 ],
                 options: {
                     livereload: ports.livereload
@@ -201,9 +201,9 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('default', ['version:apply', 'typescript:build']);
-    grunt.registerTask('test', ['version:apply', 'typescript:build', 'typescript:test', 'qunit']);
-    grunt.registerTask('testsite', ['version:apply', 'typescript:build', 'typescript:testsite', 'connect', 'open', 'watch']);
+    grunt.registerTask('default', ['typescript:build']);
+    grunt.registerTask('test', ['typescript:build', 'typescript:test', 'qunit']);
+    grunt.registerTask('testsite', ['typescript:build', 'typescript:testsite', 'connect', 'open', 'watch']);
     setup(grunt);
     version(grunt);
     grunt.registerTask('lib:reset', ['clean', 'setup', 'symlink:test', 'symlink:testsite']);
