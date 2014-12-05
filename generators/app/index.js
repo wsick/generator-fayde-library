@@ -62,12 +62,13 @@ module.exports = yeoman.generators.Base.extend({
             this.copy('build/version.js', 'build/version.js');
             this.template('build/_VersionTemplate._ts', 'build/_VersionTemplate._ts', this);
             this.mkdir('src');
-            this.copy('_.js', this.name + '.js');
-            this.copy('_.js', this.name + '.js.map');
-            this.copy('_.js', this.name + '.d.ts');
+        },
+        distFiles: function () {
+            this.copy('dist/_.js', 'dist/' + this.name + '.js');
+            this.copy('dist/_.js.map', 'dist/' + this.name + '.js.map');
+            this.copy('dist/_.d.ts', 'dist/' + this.name + '.d.ts');
         },
         themeFiles: function () {
-            this.template('Themes/_Default.theme.xml', 'Themes/Default.theme.xml', this);
             this.template('Themes/_Metro.theme.xml', 'Themes/Metro.theme.xml', this);
         },
         testfiles: function () {

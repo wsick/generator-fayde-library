@@ -3,5 +3,9 @@
     "<%= name %>": {
       "exports": "<%= module_name %>"
     }
+  },
+  "themes": {
+    "<%= name %>": {
+    }
   }
 }
