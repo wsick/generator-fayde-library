@@ -1,4 +1,5 @@
-var yeoman = require('yeoman-generator');
+var yeoman = require('yeoman-generator'),
+    unify = require('fayde-unify');
 
 module.exports = yeoman.generators.Base.extend({
     constructor: function () {
@@ -49,10 +50,6 @@ module.exports = yeoman.generators.Base.extend({
         gruntSetup: function () {
             this.copy('_package.json', 'package.json');
             this.template('_Gruntfile.js', 'Gruntfile.js', this);
-        },
-        faydeSetup: function () {
-            this.template('test/_fayde.json', 'test/fayde.json', this);
-            this.template('testsite/_fayde.json', 'testsite/fayde.json', this);
         }
     },
     writing: {
@@ -87,9 +84,26 @@ module.exports = yeoman.generators.Base.extend({
         }
     },
     install: {
+        unify: function () {
+            var done = this.async();
+            unify.commands.init({
+                name: this.name,
+                type: 'lib',
+                client: ['test/fayde.json', 'testsite/fayde.json'],
+                dist: 'dist/' + this.name,
+                exports: this.module_name
+            }, done);
+        },
+        fayde: function () {
+            var done = this.async();
+            unify.commands.install({libs: ['fayde'], options: {save: true}}, done);
+        },
+        faydeDev: function () {
+            var done = this.async();
+            unify.commands.install({libs: ['qunit'], options: {saveDev: true}}, done);
+        },
         grunt: function () {
             this.npmInstall();
-            this.bowerInstall();
         }
     }
 });
