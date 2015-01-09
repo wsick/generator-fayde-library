@@ -9,6 +9,8 @@ Install `generator-fayde-library` globally.
 
 ### Generate Fayde Library
 
+Yeoman generator will scaffold testsite sandboxed app, all build components, and a test environment that can be run from command line or launched in the browser.
+
 ```
 # Create a directory and scaffold
 $ mkdir <new directory>
