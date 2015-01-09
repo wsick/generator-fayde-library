@@ -14,7 +14,16 @@ Install `generator-fayde-library` globally.
 $ mkdir <new directory>
 $ cd <new directory>
 $ yo fayde
+```
 
-# Upon completion, launch
-$ grunt serve
+### Run tests
+```
+# Run tests in command line
+$ grunt test
+```
+
+### Run test site
+```
+# Launch testsite sandbox app in browser
+$ grunt testsite
 ```
