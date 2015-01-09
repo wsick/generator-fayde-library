@@ -1,7 +1,7 @@
 generator-fayde-library
 ===================
 
-Yeoman generator for Fayde Library.
+Yeoman generator for Fayde Libraries.
 
 Install `generator-fayde-library` globally.
 
