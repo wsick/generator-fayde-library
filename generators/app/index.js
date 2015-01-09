@@ -10,7 +10,7 @@ module.exports = yeoman.generators.Base.extend({
                 skipInstall: this.options['skip-install'],
                 callback: function () {
                     this.spawnCommand('grunt', ['symlink:test', 'symlink:testsite']);
-                }.bind(this) // bind the callback to the parent scope
+                }.bind(this)
             });
         });
     },
@@ -33,7 +33,7 @@ module.exports = yeoman.generators.Base.extend({
             this.prompt({
                 type: 'input',
                 name: 'module_name',
-                message: "Typescript module name",
+                message: "Typescript default namespace",
                 default: this.appname // Default to current folder name
             }, function (answers) {
                 this.module_name = answers.module_name;
@@ -86,12 +86,23 @@ module.exports = yeoman.generators.Base.extend({
     install: {
         unify: function () {
             var done = this.async();
+            var dist = 'dist/' + this.name;
             unify.commands.init({
                 name: this.name,
                 type: 'lib',
-                client: ['test/fayde.json', 'testsite/fayde.json'],
-                dist: 'dist/' + this.name,
-                exports: this.module_name
+                tests: [
+                    {
+                        "file": "test/fayde.json",
+                        "lib": "test/lib"
+                    },
+                    {
+                        "file": "testsite/fayde.json",
+                        "lib": "testsite/lib"
+                    }
+                ],
+                dist: dist,
+                exports: this.module_name,
+                typings: [dist + '.d.ts']
             }, done);
         },
         fayde: function () {
