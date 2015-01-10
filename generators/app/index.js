@@ -101,7 +101,10 @@ module.exports = yeoman.generators.Base.extend({
                     }
                 ],
                 dist: dist,
-                exports: this.module_name,
+                library: {
+                    type: 'export',
+                    exports: this.module_name
+                },
                 typings: [dist + '.d.ts']
             }, done);
         },
