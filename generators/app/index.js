@@ -108,13 +108,17 @@ module.exports = yeoman.generators.Base.extend({
                 typings: [dist + '.d.ts']
             }, done);
         },
-        fayde: function () {
+        unifyBower: function () {
             var done = this.async();
-            unify.commands.install({libs: ['fayde'], options: {save: true}}, done);
+            unify.commands.bower({}, done);
         },
-        faydeDev: function () {
+        bower: function () {
             var done = this.async();
-            unify.commands.install({libs: ['qunit'], options: {saveDev: true}}, done);
+            this.bowerInstall(['fayde'], {save: true}, done);
+        },
+        bowerDev: function () {
+            var done = this.async();
+            this.bowerInstall(['qunit'], {saveDev: true}, done);
         },
         grunt: function () {
             this.npmInstall();
