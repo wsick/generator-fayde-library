@@ -66,7 +66,7 @@ module.exports = yeoman.generators.Base.extend({
             this.copy('dist/_.d.ts', 'dist/' + this.name + '.d.ts');
         },
         themeFiles: function () {
-            this.template('Themes/_Metro.theme.xml', 'Themes/Metro.theme.xml', this);
+            this.template('themes/_Metro.theme.xml', 'themes/Metro.theme.xml', this);
         },
         testfiles: function () {
             this.template('test/_runner.ts', 'test/runner.ts', this);
