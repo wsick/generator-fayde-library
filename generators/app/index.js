@@ -40,6 +40,17 @@ module.exports = yeoman.generators.Base.extend({
                 //this.log(answers.module_name);
                 done();
             }.bind(this));
+        },
+        promptThemes: function () {
+            var done = this.async();
+            this.prompt({
+                type: 'confirm',
+                name: 'has_themes',
+                message: 'Does library have XAML themes?'
+            }, function (answers) {
+                this.has_themes = answers.has_themes;
+                done();
+            }.bind(this));
         }
     },
     configuring: {
@@ -66,7 +77,8 @@ module.exports = yeoman.generators.Base.extend({
             this.copy('dist/_.d.ts', 'dist/' + this.name + '.d.ts');
         },
         themeFiles: function () {
-            this.template('themes/_Metro.theme.xml', 'themes/Metro.theme.xml', this);
+            if (this.has_themes)
+                this.template('themes/_Metro.theme.xml', 'themes/Metro.theme.xml', this);
         },
         testfiles: function () {
             this.template('test/_runner.ts', 'test/runner.ts', this);
@@ -105,6 +117,7 @@ module.exports = yeoman.generators.Base.extend({
                     type: 'export',
                     exports: this.module_name
                 },
+                themes: this.has_themes ? {} : "none",
                 typings: [dist + '.d.ts']
             }, done);
         },
