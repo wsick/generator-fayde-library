@@ -61,6 +61,18 @@ module.exports = yeoman.generators.Base.extend({
         gruntSetup: function () {
             this.copy('_package.json', 'package.json');
             this.template('_Gruntfile.js', 'Gruntfile.js', this);
+        },
+        unifyGlobal: function () {
+            var done = this.async();
+            var proc = this.spawnCommand('npm install -g fayde-unify');
+            proc.on('close', function (code) {
+                if (code !== 0) {
+                    console.log("Could not globally install fayde-unify. Try running `npm install -g fayde-unify`.");
+                    done(code);
+                    return;
+                }
+                done();
+            });
         }
     },
     writing: {
@@ -121,10 +133,6 @@ module.exports = yeoman.generators.Base.extend({
                 themes: this.has_themes ? {} : "none",
                 typings: [dist + '.d.ts']
             }, done);
-        },
-        grunt: function () {
-            var done = this.async();
-            this.npmInstall([], {}, done);
         },
         unifyBower: function () {
             var done = this.async();
