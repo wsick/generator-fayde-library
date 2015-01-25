@@ -122,6 +122,10 @@ module.exports = yeoman.generators.Base.extend({
                 typings: [dist + '.d.ts']
             }, done);
         },
+        grunt: function () {
+            var done = this.async();
+            this.npmInstall([], {}, done);
+        },
         unifyBower: function () {
             var done = this.async();
             unify.commands.bower({}, done);
@@ -133,9 +137,6 @@ module.exports = yeoman.generators.Base.extend({
         bowerDev: function () {
             var done = this.async();
             this.bowerInstall(['qunit'], {saveDev: true}, done);
-        },
-        grunt: function () {
-            this.npmInstall();
         }
     }
 });
