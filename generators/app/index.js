@@ -9,7 +9,12 @@ module.exports = yeoman.generators.Base.extend({
             this.installDependencies({
                 skipInstall: this.options['skip-install'],
                 callback: function () {
-                    this.spawnCommand('grunt', ['symlink:test', 'symlink:testsite']);
+                    var cmd = this.spawnCommand('grunt', ['symlink:test', 'symlink:testsite']);
+                    cmd.on('close', function (code) {
+                        if (code !== 0) {
+                            console.log('Could not set up symbolic links for library.  Run `grunt lib:reset` as admin to complete.');
+                        }
+                    });
                 }.bind(this)
             });
         });
@@ -77,10 +82,6 @@ module.exports = yeoman.generators.Base.extend({
     },
     writing: {
         buildFiles: function () {
-            this.copy('build/utils/version.js', 'build/utils/version.js');
-            this.copy('build/setup.js', 'build/setup.js');
-            this.copy('build/version.js', 'build/version.js');
-            this.template('build/_VersionTemplate._ts', 'build/_VersionTemplate._ts', this);
             this.mkdir('src');
         },
         distFiles: function () {
