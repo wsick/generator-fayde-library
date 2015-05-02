@@ -69,7 +69,7 @@ module.exports = yeoman.generators.Base.extend({
         },
         unifyGlobal: function () {
             var done = this.async();
-            var proc = this.spawnCommand('npm install -g fayde-unify');
+            var proc = this.spawnCommand('npm', ['install', '-g', 'fayde-unify']);
             proc.on('close', function (code) {
                 if (code !== 0) {
                     console.log("Could not globally install fayde-unify. Try running `npm install -g fayde-unify`.");
