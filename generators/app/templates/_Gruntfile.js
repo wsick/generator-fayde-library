@@ -4,6 +4,7 @@ var path = require('path'),
 
 module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-typescript');
+    grunt.loadNpmTasks('grunt-bower-install-simple');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-qunit');
@@ -114,7 +115,7 @@ module.exports = function (grunt) {
                 dest: dirs.test.build,
                 options: {
                     target: 'es5',
-                    basePath: dirs.test.root,
+                    rootDir: dirs.test.root,
                     module: 'amd',
                     sourceMap: true
                 }
@@ -128,7 +129,7 @@ module.exports = function (grunt) {
                 dest: dirs.testsite.build,
                 options: {
                     target: 'es5',
-                    basePath: dirs.testsite.root,
+                    rootDir: dirs.testsite.root,
                     module: 'amd',
                     sourceMap: true
                 }

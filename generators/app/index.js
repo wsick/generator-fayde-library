@@ -119,7 +119,8 @@ module.exports = yeoman.generators.Base.extend({
                 tests: [
                     {
                         "file": "test/fayde.json",
-                        "lib": "test/lib"
+                        "lib": "test/lib",
+                        "exclude": ["qunit"]
                     },
                     {
                         "file": "testsite/fayde.json",
