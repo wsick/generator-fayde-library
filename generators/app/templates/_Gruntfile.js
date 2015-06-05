@@ -12,6 +12,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-open');
+    grunt.loadNpmTasks("grunt-version-ts");
     var unify = gunify(grunt);
 
     var ports = {
@@ -122,7 +123,7 @@ module.exports = function (grunt) {
             },
             testsite: {
                 src: [
-                    'typings/*.d.ts',
+                    'typings/**/*.d.ts',
                     '<%%= dirs.testsite.root %>/**/*.ts',
                     '!<%%= dirs.testsite.lib %>/**/*.ts'
                 ].concat(unify.typings()),
