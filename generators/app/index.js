@@ -83,7 +83,7 @@ module.exports = yeoman.generators.Base.extend({
     writing: {
         buildFiles: function () {
             this.mkdir('src');
-            this.copy('_travis.yml', 'travis.yml');
+            this.copy('_travis.yml', '.travis.yml');
         },
         distFiles: function () {
             this.copy('dist/_.js', 'dist/' + this.name + '.js');
