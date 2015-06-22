@@ -140,7 +140,7 @@ module.exports = function (grunt) {
             all: ['<%%= dirs.test.root %>/*.html']
         },
         connect: {
-            server: {
+            testsite: {
                 options: {
                     port: ports.server,
                     base: dirs.testsite.root,
