@@ -9,10 +9,10 @@ module.exports = yeoman.generators.Base.extend({
             this.installDependencies({
                 skipInstall: this.options['skip-install'],
                 callback: function () {
-                    var cmd = this.spawnCommand('grunt', ['symlink:test', 'symlink:testsite']);
+                    var cmd = this.spawnCommand('gulp', ['reset']);
                     cmd.on('close', function (code) {
                         if (code !== 0) {
-                            console.log('Could not set up symbolic links for library.  Run `grunt lib:reset` as admin to complete.');
+                            console.log('Could not set up symbolic links for library.  Run `gulp reset` as admin to complete.');
                         }
                     });
                 }.bind(this)
@@ -63,9 +63,10 @@ module.exports = yeoman.generators.Base.extend({
             this.template('_bower.json', 'bower.json', this);
             this.copy('_bowerrc', '.bowerrc');
         },
-        gruntSetup: function () {
+        gulpSetup: function () {
             this.copy('_package.json', 'package.json');
-            this.template('_Gruntfile.js', 'Gruntfile.js', this);
+            this.directory('gulp', 'gulp');
+            this.template('_gulpfile.js', 'gulpfile.js', this);
         },
         unifyGlobal: function () {
             var done = this.async();
@@ -100,7 +101,7 @@ module.exports = yeoman.generators.Base.extend({
             this.copy('test/tests/test1.ts', 'test/tests/test1.ts');
         },
         testsiteFiles: function () {
-            this.copy('testsite/default.html', 'testsite/default.html');
+            this.copy('testsite/index.html', 'testsite/index.html');
             this.copy('testsite/default.fap', 'testsite/default.fap');
             this.template('testsite/Views/_test1.fayde', 'testsite/Views/test1.fayde', this);
         },

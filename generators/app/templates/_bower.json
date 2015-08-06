@@ -2,10 +2,10 @@
   "name": "<%= name %>",
   "version": "0.1.0",
   "ignore": [
-    "build",
+    "gulp",
     "test",
     "testsite",
     "typings",
-    "Gruntfile.js"
+    "gulpfile.js"
   ]
 }

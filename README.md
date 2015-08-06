@@ -18,14 +18,19 @@ $ cd <new directory>
 $ yo fayde
 ```
 
+### Install bower libraries and set up test and testsite libraries
+```
+$ gulp reset
+```
+
 ### Run tests
 ```
 # Run tests in command line
-$ grunt test
+$ gulp test
 ```
 
 ### Run test site
 ```
 # Launch testsite sandbox app in browser
-$ grunt testsite
+$ gulp testsite
 ```
