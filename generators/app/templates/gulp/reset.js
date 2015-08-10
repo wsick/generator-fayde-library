@@ -23,12 +23,12 @@ module.exports = function (meta) {
         gulp.task('symlink-' + scaffold.name, function () {
             var srcs = glob.sync("lib/*", !scaffold.ignore ? undefined : {ignore: scaffold.ignore});
             var dests = srcs.map(function (src) {
-                return path.join(scaffold.name, 'lib', path.basename(src));
+                return path.resolve(path.join(scaffold.name, 'lib', path.basename(src)));
             });
 
             for (var i = 0, dirs = scaffold.symdirs || []; i < dirs.length; i++) {
                 srcs.push('./' + dirs[i]);
-                dests.push(path.join(scaffold.name, 'lib', meta.name, dirs[i]));
+                dests.push(path.resolve(path.join(scaffold.name, 'lib', meta.name, dirs[i])));
             }
 
             return gulp.src(srcs).pipe(symlink.relative(dests, {force: true}));
