@@ -15,7 +15,7 @@ Yeoman generator will scaffold testsite sandboxed app, all build components, and
 # Create a directory and scaffold
 $ mkdir <new directory>
 $ cd <new directory>
-$ yo fayde
+$ yo fayde-library
 ```
 
 ### Install bower libraries and set up test and testsite libraries
