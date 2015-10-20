@@ -17,11 +17,16 @@ module.exports = function (meta) {
             .pipe(ts({
                 target: 'ES5',
                 module: 'amd',
-                outDir: 'stress/.build/',
+                outDir: 'testsite/.build/',
                 pathFilter: {'testsite': ''}
             }))
             .pipe(sourcemaps.write())
             .pipe(gulp.dest('testsite/.build/'))
+            .pipe(connect.reload());
+    });
+
+    gulp.task('testsite-reload', function () {
+        gulp.src('testsite/*.html')
             .pipe(connect.reload());
     });
 
@@ -38,7 +43,8 @@ module.exports = function (meta) {
             port: scaffold.port
         });
 
-        gulp.watch('testsite/**/*.ts', ['testsite-build']);
-        gulp.watch('testsite/.build/**/*', connect.reload);
+        gulp.watch('testsite/!(lib)/**/*.ts', ['testsite-build']);
+        gulp.watch('testsite/.build/**/*', ['testsite-reload']);
+        gulp.watch('dist/*.js', ['testsite-reload']);
     });
 };
